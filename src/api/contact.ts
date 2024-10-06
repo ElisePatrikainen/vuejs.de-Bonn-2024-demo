@@ -85,7 +85,7 @@ export async function updateContact(
   options?: Options<'json'>,
 ): Promise<Contact> {
   await new Promise(resolve => setTimeout(resolve, 3000))
-  // throw new Error('Failed to update')
+  throw new Error('Failed to update')
   return contacts.patch<Contact, 'json'>(`/${contact.id}`, contact, options)
 }
 

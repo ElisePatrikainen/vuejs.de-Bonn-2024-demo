@@ -1,6 +1,23 @@
+<!-- <script lang="ts">
+import { defineColadaLoader } from 'unplugin-vue-router/data-loaders/pinia-colada'
+import { getContactById } from '@/api/contact';
+
+export const useUserData = defineColadaLoader('/users/colada-loader.[id]', {
+  async query(to, { signal }) {
+    // return await { name : 'test' }
+    console.log('to', to);
+    
+    return getContactById(to.params.id as string, { signal })
+  },
+  key: (to) => ['contact', to.params.id],
+  // Keep the data "fresh" 10 seconds to avoid fetching the same data too often
+  staleTime: 10000,
+})
+</script> -->
+
 <script setup lang="ts">
-import { getContactById, updateContact, type Contact } from '@/api/contact';
-import { defineContactQuery } from '@/queries/contact';
+import { updateContact, type Contact } from '@/api/contact';
+import { getContactById } from '@/api/contact';
 import { useMutation, useQuery, useQueryCache } from '@pinia/colada';
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router'
@@ -21,9 +38,13 @@ const { data, refetch } = useQuery({
     return getContactById(id.value)
   },
   placeholderData: () => {
+    console.log('placeholderData', cache.getQueryData(['contacts']));
+    
     return (cache.getQueryData(['contacts']) as Array<Contact> || undefined)?.find((contact: any) => contact.id === id.value)
   }
 })
+
+// const { data } = useUserData()
 
 const { mutate } = useMutation({
   mutation: () => {
@@ -48,12 +69,12 @@ const { mutate } = useMutation({
 <template>
   <div class="about">
     <RouterLink :to="{
-      name: 'home'
+      path: '/'
     }">Home</RouterLink>
-    <RouterLink :to="{
+    <!-- <RouterLink :to="{
       name: 'contact',
       params: { id: Number(route.params.id) + 1 },
-    }">Next</RouterLink>
+    }">Next</RouterLink> -->
     <h1>This is an about page : {{ data }}</h1>
     <div>TEST : {{ id }}</div>
   </div>
