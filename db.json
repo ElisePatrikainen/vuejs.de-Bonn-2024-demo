@@ -1,0 +1,136 @@
+{
+  "contacts": [
+    {
+      "id": "1",
+      "firstName": "Anna",
+      "lastName": "Naas",
+      "bio": "Loves ananás juice",
+      "photoURL": "https://i.pravatar.cc/150?u=anna",
+      "isFavorite": true,
+      "createdAt": "2023-01-15T08:00:00.000Z",
+      "updatedAt": "2023-10-20T14:30:00.000Z"
+    },
+    {
+      "id": "2",
+      "firstName": "Eduardo",
+      "lastName": "Pinia",
+      "bio": "Pineapple pizza lover",
+      "photoURL": "https://i.pravatar.cc/150?u=ananas",
+      "isFavorite": false,
+      "createdAt": "2023-03-05T12:45:00.000Z",
+      "updatedAt": "2023-09-18T09:15:00.000Z"
+    },
+    {
+      "id": "3",
+      "firstName": "Nico",
+      "lastName": "Lada",
+      "bio": "Tropical fruit enthusiast",
+      "photoURL": "https://i.pravatar.cc/150?u=nicoladas",
+      "isFavorite": true,
+      "createdAt": "2023-02-10T17:20:00.000Z",
+      "updatedAt": "2023-11-02T20:10:00.000Z"
+    },
+    {
+      "id": "4",
+      "firstName": "Ava",
+      "lastName": "Caxi",
+      "bio": "I did Rio's Carnaval disguised as a pineapple",
+      "photoURL": "https://i.pravatar.cc/150?u=pinia",
+      "isFavorite": false,
+      "createdAt": "2023-04-25T09:30:00.000Z",
+      "updatedAt": "2023-08-15T11:55:00.000Z"
+    },
+    {
+      "id": "5",
+      "firstName": "Pine",
+      "lastName": "Apples",
+      "bio": "I grow on a plant, not on a tree.",
+      "photoURL": "https://i.pravatar.cc/150?u=multi-flowers",
+      "isFavorite": true,
+      "createdAt": "2023-07-12T15:15:00.000Z",
+      "updatedAt": "2023-11-01T18:40:00.000Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Basic Tee",
+      "color": "Sienna",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg",
+      "price": 24,
+      "availability": 1
+    },
+    {
+      "id": 4,
+      "name": "Basic G",
+      "color": "Grey",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg",
+      "price": 24,
+      "availability": 0
+    },
+    {
+      "id": 5,
+      "name": "Basic Pink",
+      "color": "Pink",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg",
+      "price": 30,
+      "availability": 3
+    },
+    {
+      "id": 6,
+      "name": "Classic",
+      "color": "White",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
+      "price": 150,
+      "availability": 5
+    },
+    {
+      "id": 7,
+      "name": "Sea",
+      "color": "White",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-02.jpg",
+      "price": 150,
+      "availability": 6
+    },
+    {
+      "id": 8,
+      "name": "Outside",
+      "color": "Black",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-04.jpg",
+      "price": 210,
+      "availability": 8
+    },
+    {
+      "id": 9,
+      "name": "Promenade",
+      "color": "Beige",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-03.jpg",
+      "price": 200,
+      "availability": 9
+    },
+    {
+      "id": 10,
+      "name": "Satchel",
+      "color": "Blue",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/category-page-07-product-03.jpg",
+      "price": 220,
+      "availability": 4
+    },
+    {
+      "id": 3,
+      "name": "Basic",
+      "color": "White",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg",
+      "price": 24,
+      "availability": 9
+    },
+    {
+      "id": 2,
+      "name": "Basic X",
+      "color": "Black",
+      "imagesrc": "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg",
+      "price": 24,
+      "availability": 4
+    }
+  ]
+}
