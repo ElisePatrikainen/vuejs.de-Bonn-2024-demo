@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 import { defineColadaLoader } from 'unplugin-vue-router/data-loaders/pinia-colada'
 import { getContactById } from '@/api/contact';
 
@@ -9,33 +9,27 @@ export const useUserData = defineColadaLoader('/users/colada-loader.[id]', {
   },
   staleTime: 10000,
 })
-</script>
+</script> -->
 
 <script setup lang="ts">
-import { updateContact, type Contact } from '@/api/contact';
-import { useMutation, useQuery, useQueryCache } from '@pinia/colada';
+import { getContactById, updateContact } from '@/api/contact';
+import { useQuery } from '@pinia/colada';
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+const id = ref(route.params.id)
+watch(() => route.params.id, (newId) => id.value = newId)
 
-const cache = useQueryCache()
-const newContactName = ref('')
-
-// Add query
-// const data = ref()
-// data.value = await getContactById(id.value)
-
-const { data: contact } = useUserData()
-
-// const { data } = useUserData()
-
-const { mutate } = useMutation({
-  mutation: () => {
-    return updateContact({id: Number(route.params.id), firstName: newContactName.value})
-  },
-  keys: [['contact', route.params.id]]
+// Use data loader instead
+const { data: contact } = useQuery({
+  key: () => ['contact', id.value],
+  query: () => getContactById(Number(id.value))
 })
+
+function addFavorite() {
+  updateContact({id: Number(route.params.id), isFavorite: true})
+}
 
 </script>
 
@@ -76,7 +70,7 @@ const { mutate } = useMutation({
           <div>Availability: {{ contact?.availability }}</div>
 
           <div class="mt-10 flex">
-            <button @click="bookItem"
+            <button @click="addFavorite"
               class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">
               Add to bag
             </button>
