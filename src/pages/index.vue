@@ -3,19 +3,19 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useQuery, useQueryCache, type UseQueryEntry } from '@pinia/colada'
 import { getAllContacts } from '@/api/contact';
 import { defineContactQuery } from '@/queries/contact';
+import { useContactsQuery } from '@/queries/contacts';
+import { ref } from 'vue';
+import { useSearchedContacts } from '@/queries/contacts copy';
 
-const { data: contacts } = useQuery({
-  key: () => ['contacts'],
-  query: getAllContacts,
-  staleTime: 0,
-})
+const { data: contacts, search } = useSearchedContacts()
 </script>
 
 <template>
-  <div class="bg-gray-900 py-24 sm:py-32">
+  <div class="py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
       <div class="mx-auto max-w-2xl">
-        <pre>{{ data }}</pre>
+        <!-- <pre>{{ data }}</pre> -->
+        <input v-model="search" />
         <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Meet our team</h2>
         <p class="mt-4 text-lg leading-8 text-gray-400">We’re a dynamic group of individuals who are passionate about
           what we do.</p>
