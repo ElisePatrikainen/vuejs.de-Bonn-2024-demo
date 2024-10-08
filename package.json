@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.1.5",
-    "@pinia/colada": "/Users/elise/Documents/pinia-colada/pinia-colada-0.10.0.tgz",
+    "@pinia/colada": "^0.10.0",
     "@vueuse/core": "^11.1.0",
     "mande": "^2.0.9",
     "pinia": "^2.1.7",

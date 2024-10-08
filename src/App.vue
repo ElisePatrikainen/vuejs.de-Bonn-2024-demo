@@ -20,6 +20,12 @@ const { data: contacts } = useQuery({
   </div>
 </template>
 
+<style>
+html {
+  background-color: black;
+}
+</style>
+
 <!-- <style scoped>
 header {
   line-height: 1.5;

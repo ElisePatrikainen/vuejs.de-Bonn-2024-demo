@@ -7,27 +7,28 @@ import { useContactsQuery } from '@/queries/contacts';
 import { ref } from 'vue';
 import { useSearchedContacts } from '@/queries/contacts copy';
 
-const contacts = await getAllContacts()
-
-const search = ref('')
+// const contacts = await getAllContacts()
 
 // Use a query instead
-
-// Include `search` in a defined query
+const isPending = ref(false)
+const { data: contacts } = useQuery({
+  key: ['contacts'],
+  query: getAllContacts,
+  staleTime: 15000,
+})
 
 </script>
 
 <template>
-  <div class="py-24 sm:py-32">
+  <div v-if="!isPending" class="py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
       <div class="mx-auto max-w-2xl">
-        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Meet the Simpsons family</h2>
+        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Meet the Simpsons</h2>
         <p class="mt-4 text-lg leading-8 text-gray-400">A dynamic group of individuals who are passionate about
           what they do.</p>
       </div>
       <ul role="list"
         class="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8">
-        <input v-model="search" />
         <li v-for="person in contacts" :key="person.id" class="rounded-2xl bg-gray-800 px-8 py-10">
           <RouterLink :to="{
             path: `/contact/${person.id}`
@@ -62,6 +63,20 @@ const search = ref('')
       </ul>
     </div>
   </div>
+  <div v-else class="h-screen mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+  <div class="animate-pulse flex space-x-4">
+    <div class="flex-1 space-y-6 py-1">
+      <div class="h-2 bg-slate-700 rounded"></div>
+      <div class="space-y-3">
+        <div class="grid grid-cols-3 gap-4">
+          <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+          <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+        </div>
+        <div class="h-2 bg-slate-700 rounded"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

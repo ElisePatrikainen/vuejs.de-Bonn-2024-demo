@@ -37,10 +37,6 @@ export const useSearchedContacts = defineQuery(() => {
 
 
 
-
-
-
-
 // export const useContactsQuery = defineQuery(() => {
 //     const search = ref('')
 //     const query = useQuery({

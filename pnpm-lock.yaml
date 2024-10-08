@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.1.5
     version: 2.1.5(vue@3.5.11)
   '@pinia/colada':
-    specifier: /Users/elise/Documents/pinia-colada/pinia-colada-0.10.0.tgz
-    version: file:../pinia-colada/pinia-colada-0.10.0.tgz
+    specifier: ^0.10.0
+    version: 0.10.0
   '@vueuse/core':
     specifier: ^11.1.0
     version: 11.1.0(vue@3.5.11)
@@ -755,6 +755,10 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
     dev: true
+
+  /@pinia/colada@0.10.0:
+    resolution: {integrity: sha512-lIbBrjtIN9yzhdrKYI+4wsSw1WymMZ/LpsagbKGapKfOra8Y9PK2CxLiiiXZoLGYoklnQKrOfHeuBtBoOR23IA==}
+    dev: false
 
   /@pkgjs/parseargs@0.11.0:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -3707,9 +3711,3 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
-
-  file:../pinia-colada/pinia-colada-0.10.0.tgz:
-    resolution: {integrity: sha512-3L40FV2s8+vCQBdrc12AhJV9j/lKDyaZ1vOHV3cgBSm5BsY+6j6QWAP6E4EwsfV5hsce12LMVT+30ssW7tujCw==, tarball: file:../pinia-colada/pinia-colada-0.10.0.tgz}
-    name: '@pinia/colada'
-    version: 0.10.0
-    dev: false

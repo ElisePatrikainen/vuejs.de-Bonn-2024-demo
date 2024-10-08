@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+<script lang="ts">
 import { defineColadaLoader } from 'unplugin-vue-router/data-loaders/pinia-colada'
 import { getContactById } from '@/api/contact';
 
@@ -9,11 +9,11 @@ export const useUserData = defineColadaLoader('/users/colada-loader.[id]', {
   },
   staleTime: 10000,
 })
-</script> -->
+</script>
 
 <script setup lang="ts">
-import { getContactById, updateContact } from '@/api/contact';
-import { useQuery } from '@pinia/colada';
+import { updateContact } from '@/api/contact';
+import { useQuery, useMutation } from '@pinia/colada';
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router'
 
@@ -22,27 +22,32 @@ const id = ref(route.params.id)
 watch(() => route.params.id, (newId) => id.value = newId)
 
 // Use data loader instead
-const { data: contact } = useQuery({
-  key: () => ['contact', id.value],
-  query: () => getContactById(Number(id.value))
-})
+const { data: contact } = useUserData()
 
-function addFavorite() {
-  updateContact({id: Number(route.params.id), isFavorite: true})
-}
+// Use mutation instead
+// function addFavorite() {
+//   updateContact({ id: Number(route.params.id), isFavorite: !contact.value.isFavorite })
+// }
+const { mutate: addFavorite } = useMutation({
+  mutation: () => updateContact({ id: Number(route.params.id), isFavorite: !contact.value.isFavorite }),
+  keys: [['contact', id.value]],
+})
 
 </script>
 
 
 <template>
-  <div>
+  <div v-if="!isPending">
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <div class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
         <img :src="contact?.photoURL" class="h-full w-full object-cover object-center sm:rounded-lg" />
 
         <!-- Product info -->
         <div class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-          <h1 class="text-3xl font-bold tracking-tight text-white">{{ contact?.firstName }} {{ contact?.lastName }}</h1>
+          <h1 class="text-3xl font-bold tracking-tight text-white">{{ contact?.firstName }} {{ contact?.lastName }}
+            <span v-if="contact?.isFavorite">❤️</span>
+            <span v-else>😐</span>
+          </h1>
 
           <div class="mt-3">
             <p class="text-3xl tracking-tight text-white">{{ contact?.bio }}</p>
@@ -72,7 +77,7 @@ function addFavorite() {
           <div class="mt-10 flex">
             <button @click="addFavorite"
               class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">
-              Add to bag
+              Add as favorite
             </button>
             <button type="button"
               class="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500">
@@ -84,5 +89,18 @@ function addFavorite() {
       </div>
     </div>
   </div>
+  <div v-else class="h-screen mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+  <div class="animate-pulse flex space-x-4">
+    <div class="flex-1 space-y-6 py-1">
+      <div class="h-2 bg-slate-700 rounded"></div>
+      <div class="space-y-3">
+        <div class="grid grid-cols-3 gap-4">
+          <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+          <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+        </div>
+        <div class="h-2 bg-slate-700 rounded"></div>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
-
