@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { useQuery } from '@pinia/colada'
 import { getAllContacts } from './api/contact';
+import TheHeader from './components/TheHeader.vue';
 
 const { data: contacts } = useQuery({
   key: () => ['contacts'],
@@ -11,7 +12,12 @@ const { data: contacts } = useQuery({
 </script>
 
 <template>
-  <RouterView />
+  <div class="bg-gray-900 ">
+    <TheHeader />
+    <Suspense>
+      <RouterView />
+    </Suspense>
+  </div>
 </template>
 
 <!-- <style scoped>

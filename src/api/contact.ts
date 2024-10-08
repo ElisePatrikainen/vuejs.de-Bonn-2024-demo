@@ -26,14 +26,16 @@ export interface ContactWithDetails extends ContactInfo, ContactDetails, _Update
  * Retrieve all the contact list.
  */
 export async function getAllContacts(options?: Options<'json'>): Promise<Contact[]> {
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  return contacts.get<ContactWithDetails[]>('/', options).then(contacts => {
-    contacts.forEach(c => {
-      // @ts-ignore: we want to remove the bio property
-      delete c.bio
-    })
+  const _contacts = await contacts.get<ContactWithDetails[]>('/', options).then(contacts => {
+    if (options?.query?.q) {
+      return contacts.filter(c => {
+        return c.firstName.includes(options.query.q) || c.lastName.includes(options.query.q)
+      })
+    }
     return contacts
   })
+  await new Promise(resolve => setTimeout(resolve, 2000))
+  return _contacts
 }
 
 /**
@@ -48,8 +50,9 @@ export async function getContactById(
   // if (Math.random() > 0.75) {
   //   throw new Error('Failed to fetch')
   // }
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  return contacts.get<Contact>(id, options)
+  const _contacts = contacts.get<ContactWithDetails>(id, options)
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  return _contacts
 }
 
 /**
@@ -84,9 +87,11 @@ export async function updateContact(
   contact: Partial<ContactInfo> & { id: number },
   options?: Options<'json'>,
 ): Promise<Contact> {
-  await new Promise(resolve => setTimeout(resolve, 3000))
+  // await new Promise(resolve => setTimeout(resolve, 1000))
   // throw new Error('Failed to update')
-  return contacts.patch<Contact, 'json'>(`/${contact.id}`, contact, options)
+  const res = contacts.patch<Contact, 'json'>(`/${contact.id}`, contact, options)
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  return res
 }
 
 // /**
